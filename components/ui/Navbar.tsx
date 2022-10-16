@@ -1,13 +1,17 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import { AppBar, IconButton, Toolbar, Typography } from '@mui/material';
 import MenuOutlineIcon from '@mui/icons-material/MenuOutlined'
+import { UIContext } from '../../context/ui-context/UIContext';
 
 export const Navbar = () => {
+
+   const { openSideMenu } = useContext(UIContext)
+
    return (
       <AppBar position='sticky'>
          <Toolbar>
-            <IconButton size='large' edge='start' >
+            <IconButton onClick={openSideMenu} size='large' edge='start' >
                <MenuOutlineIcon />
             </IconButton>
 

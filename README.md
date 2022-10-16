@@ -13,17 +13,26 @@
 First, run the development server:
 
 ```bash
-# or
-yarn dev
+   npm run dev
+   # or
+   yarn dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## Instalaciones
+## Dependecias
 
-      yarn add @mui/material @emotion/react @emotion/styled
-      yarn add @mui/icons-material
+``` npm
+   yarn add @mui/material @emotion/react @emotion/styled
+   yarn add @mui/icons-material
+   yarn add uuid
+```
 
 ## Enlaces
 
 - [Material UI](https://mui.com/)
+
+## Curiosidades
+
+1. Quitar el scroll Y and X en List
+   - ejemplo en pages "EntryLlist"

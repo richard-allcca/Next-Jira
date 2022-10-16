@@ -31,3 +31,5 @@ class MyDocument extends Document {
 }
 
 export default MyDocument
+
+// NOTE - Sirve para tener control sobre como next crea el documento
