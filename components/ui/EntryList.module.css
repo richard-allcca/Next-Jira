@@ -1,0 +1,11 @@
+.dragging {
+   background-color: hsla(0, 2%, 58%, 0.4);
+   border: 1px dashed rgba(185, 84, 84, 0.5);
+}
+
+.paper {
+   height: calc(100vh - 180px);
+   overflow: scroll;
+   background-color: transparent;
+   padding: 1px 5px;
+}
