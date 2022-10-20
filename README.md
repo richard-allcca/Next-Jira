@@ -2,36 +2,44 @@
 
 - Detalles
 
-## Getting Started - Se utilizo `yarn` en lugar de `npm`
+## Para correr en local - Se utilizo `yarn` en lugar de `npm`
 
-First, run the development server:
+1. First, run the development server:
 
-```bash
-   npm run dev
-   # or
-   yarn dev
-```
+      ```bash
+         npm run dev
+         # or
+         yarn dev
+      ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+   Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-### Se necesita la base de datos, para correr en local
+2. Se necesita la base de datos, para correr en local
 
-   ``` Docker
-      docker-compose up -d
-   ```
+      ``` Docker
+         docker-compose up -d
+      ```
 
-- El -d, significa __detached__
-- Importante agregar `mongo/` al gitignore
+   - El -d, significa __detached__
+   - Importante agregar `mongo/` al gitignore
 
-### MongoDB URL Local
+3. MongoDB URL Local
 
    ``` URI
       mongodb://localhost:27017/entriesdb
    ```
 
-### Configuarar variables de entorno
+4. Configuarar variables de entorno
 
-- Renombrar el archivo __.env.example__ a __.env__
+   - Renombrar el archivo __.env.example__ a __.env__
+
+5. Llenar la base de datos in información de prueba
+
+   - use GET
+
+   ```url
+     http://localhost:3000/api/seed
+   ```
 
 ## Dependecias
 

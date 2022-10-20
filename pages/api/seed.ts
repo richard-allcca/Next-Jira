@@ -1,13 +1,14 @@
 
 import { NextApiResponse, NextApiRequest } from 'next';
-import { db } from '../../database';
+import { db, seedData } from '../../database';
+import { EntryModel } from '../../models';
 
 type Data = {
    ok: boolean,
    message: string
 }
 
-export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
 
    if (process.env.NODE_ENV === 'production') {
       return res.status(401).json({ ok: false, message: 'No tiene acceso a este servicio' });
@@ -16,6 +17,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse<Data>)
 
    db.connect();
 
+   await EntryModel.deleteMany();
+   await EntryModel.insertMany(seedData.entries);
 
 
    db.disconnect();
