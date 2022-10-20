@@ -8,6 +8,7 @@ type Data =
    | { message: string }
    | IEntry[]
 
+
 export default function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
 
    switch (req.method) {
@@ -30,3 +31,5 @@ const getEntries = async (res: NextApiResponse<Data>) => {
 
    res.status(200).json(entries)
 }
+
+// ANCHOR - ruta para obtener todas las entradas desde el cliente

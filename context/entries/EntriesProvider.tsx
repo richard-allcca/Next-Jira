@@ -1,9 +1,11 @@
 import { FC, PropsWithChildren, useReducer } from 'react';
 import { v4 as uuidv4 } from "uuid";
+import { useEffect } from 'react';
 
 import { Entry } from '../../interfaces/entry';
 
 import { entriesReducer, EntriesContext } from './';
+import { entriesApi } from '../../apis';
 
 export interface EntriesState {
    entries: Entry[];
@@ -33,6 +35,19 @@ export const EntriesProvider: FC<PropsWithChildren> = ({ children }): JSX.Elemen
 
       dispatch({ type: '[Entries] - Update State', payload: entry })
    }
+
+   const refreshEntries = async () => {
+      const { data } = await entriesApi<Entry[]>('/entries');
+      // console.log(resp)
+      dispatch({ type: '[Entries] - Refresh Entries', payload: data })
+   }
+
+   useEffect(() => {
+
+      refreshEntries();
+
+   }, [])
+
 
    return (
       <EntriesContext.Provider value={{ ...state, addNewEntry, changeStateEntry }}>
