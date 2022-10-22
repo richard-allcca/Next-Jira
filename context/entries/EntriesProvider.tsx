@@ -20,15 +20,18 @@ export const EntriesProvider: FC<PropsWithChildren> = ({ children }): JSX.Elemen
 
    const [state, dispatch] = useReducer(entriesReducer, ENTRIES_INITIAL_STATE)
 
-   const addNewEntry = (description: string) => {
-      const newEntry: Entry = {
-         _id: uuidv4(),
-         description,
-         status: 'pending',
-         createAt: Date.now()
-      }
+   const addNewEntry = async (description: string) => {
 
-      dispatch({ type: '[Entries] - Add', payload: newEntry });
+      // const newEntry: Entry = { // Este proceso fue delegado a axios
+      //    _id: uuidv4(),
+      //    description,
+      //    status: 'pending',
+      //    createAt: Date.now()
+      // }
+
+      const { data } = await entriesApi.post<Entry>('/entries', { description })
+
+      dispatch({ type: '[Entries] - Add', payload: data });
    }
 
    const changeStateEntry = (entry: Entry) => {
