@@ -20,36 +20,35 @@ export const EntriesProvider: FC<PropsWithChildren> = ({ children }): JSX.Elemen
 
    const [state, dispatch] = useReducer(entriesReducer, ENTRIES_INITIAL_STATE)
 
-   const addNewEntry = async (description: string) => {
 
-      // const newEntry: Entry = { // Este proceso fue delegado a axios
-      //    _id: uuidv4(),
-      //    description,
-      //    status: 'pending',
-      //    createAt: Date.now()
-      // }
+   const addNewEntry = async (description: string) => {
 
       const { data } = await entriesApi.post<Entry>('/entries', { description })
 
       dispatch({ type: '[Entries] - Add', payload: data });
    }
 
-   const changeStateEntry = (entry: Entry) => {
+   const changeStateEntry = async (entry: Entry) => {
 
-      dispatch({ type: '[Entries] - Update State', payload: entry })
+      try {
+
+         // NOTE - para no devolver todo el entry destructura en el parametro recibido solo lo necesario
+         const { data } = await entriesApi.put<Entry>(`/entries/${entry._id}`, entry)
+         dispatch({ type: '[Entries] - Update State', payload: data })
+
+      } catch (error) {
+         console.log(error)
+      }
    }
 
    const refreshEntries = async () => {
+
       const { data } = await entriesApi<Entry[]>('/entries');
-      // console.log(resp)
+
       dispatch({ type: '[Entries] - Refresh Entries', payload: data })
    }
 
-   useEffect(() => {
-
-      refreshEntries();
-
-   }, [])
+   useEffect(() => { refreshEntries() }, [])
 
 
    return (
@@ -58,3 +57,11 @@ export const EntriesProvider: FC<PropsWithChildren> = ({ children }): JSX.Elemen
       </EntriesContext.Provider>
    )
 }
+
+// NOTE - método de "addNewEntry" para agregar entradas sin back-end
+// const newEntry: Entry = { // Este proceso fue delegado a axios
+      //    _id: uuidv4(),
+      //    description,
+      //    status: 'pending',
+      //    createAt: Date.now()
+      // }
