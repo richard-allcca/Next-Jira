@@ -54,6 +54,8 @@
 - [Material UI](https://mui.com/)
 - [Drag & Drop react-beautiful-dnd](https://www.npmjs.com/package/react-beautiful-dnd)
 - [Codigos de respuesta http](https://developer.mozilla.org/es/docs/Web/HTTP/Status)
+- [Middleware Next](https://nextjs.org/docs/advanced-features/middleware)
+- [Guia de migración Middleware Next](https://nextjs.org/docs/messages/middleware-upgrade-guide#breaking-changes)
 
 ## Notas - Errores y Ocurrencias
 
@@ -75,6 +77,13 @@
    2. Ocurrencia: La Propiedad `draggable` de Card no es soportada en "Brave"
 
    3. Nota: con Next puedes usar variables de entorno anteponiendo `NEXT_PUBLIC_NAME`
+
+   4. Nota: Expresión regular para validar `Mongo Id`
+
+      ```REGEXP
+         const checkMongoIDRegExp = new RegExp("^[0-9a-fA-F]{24}$");
+      ```
+      
 
 ## Temas tocados en este proyecto
 
