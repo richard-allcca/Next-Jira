@@ -4,7 +4,7 @@
 
 ## Para correr en local - Se utilizo `yarn` en lugar de `npm`
 
-1. First, run the development server:
+- First, run the development server:
 
       ```bash
          npm run dev
@@ -14,40 +14,45 @@
 
    Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-2. Se necesita la base de datos, para correr en local
+## Configuararciones iniciales
 
-      ``` Docker
-         docker-compose up -d
-      ```
+1. Reconstruir los modulos con `npm i`
 
-   - El -d, significa __detached__
    - Importante agregar `mongo/` al gitignore
 
-3. MongoDB URL Local
+2. Para correr en local se necesita la base de datos
 
-   ``` URI
-      mongodb://localhost:27017/entriesdb
-   ```
+         ``` Docker
+            docker-compose up -d
+         ```
 
-4. Configuarar variables de entorno
+   - El -d, significa __detached__
 
-   - Renombrar el archivo __.env.example__ a __.env__
+3. Configuarar variables de entorno
 
-5. Llenar la base de datos in información de prueba
+   - Renombrar crear el archivo __.env.example__ a __.env__
+
+4. MongoDB URL Local, para conexion con la base de datos.
+
+         ``` URI
+            mongodb://localhost:27017/entriesdb
+         ```
+
+5. Llenar la base de datos con información de prueba
 
    - use GET
 
-   ```url
-     http://localhost:3000/api/seed
-   ```
+         ```url
+         http://localhost:3000/api/seed
+         ```
 
 ## Dependecias
 
-   ``` npm
-      yarn add @mui/material @emotion/react @emotion/styled
-      yarn add @mui/icons-material
-      yarn add uuid
-   ```
+         ``` npm
+            yarn add @mui/material @emotion/react @emotion/styled
+            yarn add @mui/icons-material
+            yarn add uuid
+         ```
 
 ## Enlaces
 
@@ -62,17 +67,17 @@
    1. Nota: Quitar el scroll Y and X en
       - ejemplo en pages "EntryLlist" ln/9
 
-         ```styles Paper
+            ```styles Paper
 
-            const stylesPaper = {
-               height: "calc(100vh - 180px)",
-               overflow: "scroll",
-               backgroundColor: "transparent",
-               padding: "1px 5px",
-               "&::-webkit-scrollbar": { display: "none" },
-               
-            };
-         ```
+               const stylesPaper = {
+                  height: "calc(100vh - 180px)",
+                  overflow: "scroll",
+                  backgroundColor: "transparent",
+                  padding: "1px 5px",
+                  "&::-webkit-scrollbar": { display: "none" },
+                  
+               };
+            ```
 
    2. Ocurrencia: La Propiedad `draggable` de Card no es soportada en "Brave"
 
@@ -80,10 +85,9 @@
 
    4. Nota: Expresión regular para validar `Mongo Id`
 
-      ```REGEXP
-         const checkMongoIDRegExp = new RegExp("^[0-9a-fA-F]{24}$");
-      ```
-      
+            ```REGEXP
+               const checkMongoIDRegExp = new RegExp("^[0-9a-fA-F]{24}$");
+            ```
 
 ## Temas tocados en este proyecto
 
