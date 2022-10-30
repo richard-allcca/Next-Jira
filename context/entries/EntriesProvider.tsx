@@ -1,6 +1,7 @@
-import { FC, PropsWithChildren, useReducer } from 'react';
-import { v4 as uuidv4 } from "uuid";
 import { useEffect } from 'react';
+
+import { FC, PropsWithChildren, useReducer } from 'react';
+import { useSnackbar } from 'notistack'
 
 import { Entry } from '../../interfaces/entry';
 
@@ -19,6 +20,7 @@ const ENTRIES_INITIAL_STATE: EntriesState = {
 export const EntriesProvider: FC<PropsWithChildren> = ({ children }): JSX.Element => {
 
    const [state, dispatch] = useReducer(entriesReducer, ENTRIES_INITIAL_STATE)
+   const { enqueueSnackbar } = useSnackbar();
 
 
    const addNewEntry = async (description: string) => {
@@ -28,13 +30,26 @@ export const EntriesProvider: FC<PropsWithChildren> = ({ children }): JSX.Elemen
       dispatch({ type: '[Entries] - Add', payload: data });
    }
 
-   const changeStateEntry = async (entry: Entry) => {
+   const changeStateEntry = async (entry: Entry, showSnackbar = false) => {
 
       try {
 
          // NOTE - para no devolver todo el entry destructura en el parametro recibido solo lo necesario
          const { data } = await entriesApi.put<Entry>(`/entries/${entry._id}`, entry)
          dispatch({ type: '[Entries] - Update State', payload: data })
+
+         // STUB - Snackbar example
+         if (showSnackbar) {
+
+            enqueueSnackbar('Entrada actualizada 🙋‍♂️', {
+               variant: 'success',
+               autoHideDuration: 1500,
+               anchorOrigin: {
+                  vertical: 'top',
+                  horizontal: 'right'
+               }
+            })
+         }
 
       } catch (error) {
          console.log(error)

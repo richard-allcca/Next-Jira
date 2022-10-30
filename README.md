@@ -52,15 +52,20 @@
             yarn add @mui/material @emotion/react @emotion/styled
             yarn add @mui/icons-material
             yarn add uuid
+            yarn add notistack
+            yarn add date-fns
          ```
 
 ## Enlaces
 
-- [Material UI](https://mui.com/)
-- [Drag & Drop react-beautiful-dnd](https://www.npmjs.com/package/react-beautiful-dnd)
-- [Codigos de respuesta http](https://developer.mozilla.org/es/docs/Web/HTTP/Status)
-- [Middleware Next](https://nextjs.org/docs/advanced-features/middleware)
-- [Guia de migración Middleware Next](https://nextjs.org/docs/messages/middleware-upgrade-guide#breaking-changes)
+   - [Material UI](https://mui.com/)
+   - [Drag & Drop react-beautiful-dnd](https://www.npmjs.com/package/react-beautiful-dnd)
+   - [Codigos de respuesta http](https://developer.mozilla.org/es/docs/Web/HTTP/Status)
+   - [Middleware Next](https://nextjs.org/docs/advanced-features/middleware)
+   - [Guia de migración Middleware Next](https://nextjs.org/docs/messages/middleware-upgrade-guide#breaking-changes)
+   - [Snackbar](https://mui.com/material-ui/react-snackbar/)
+   - [notistack](https://github.com/iamhosseindhv/notistack)
+   - [date-fns](https://date-fns.org/)
 
 ## Notas - Errores y Ocurrencias
 
@@ -88,6 +93,9 @@
             ```REGEXP
                const checkMongoIDRegExp = new RegExp("^[0-9a-fA-F]{24}$");
             ```
+
+   5. Nota: uso de `notisnack` ejemplo en `EntriesProvider`;
+   6. Nota: uso de `date-fns` ejemplo en `EntryCards` implementación en `utils`
 
 ## Temas tocados en este proyecto
 

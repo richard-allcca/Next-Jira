@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, useMemo } from 'react';
+import { useState, ChangeEvent, useMemo, FC, useContext } from 'react';
 
 import { Grid, Card, CardHeader, CardContent, TextField, CardActions, Button, FormControl, FormLabel, RadioGroup, FormControlLabel, Radio, capitalize, IconButton } from '@mui/material';
 import SaveOutlinedIcon from '@mui/icons-material/SaveOutlined';
@@ -6,7 +6,12 @@ import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 
 import { Layout } from '../../components/layouts';
 
-import { EntryStatus } from '../../interfaces';
+import { Entry, EntryStatus } from '../../interfaces';
+import { GetServerSideProps } from 'next';
+import { isValidObjectId } from 'mongoose';
+import { dbEntries } from '../../database';
+import { EntriesContext } from '../../context/entries';
+import { getFormatDistaceToNow } from '../../utils';
 
 
 const validStatus: EntryStatus[] = ['pending', 'in-progress', 'finished'];
@@ -15,10 +20,16 @@ const validStatus: EntryStatus[] = ['pending', 'in-progress', 'finished'];
 // REVIEW - RadioGroup en horizontal con "row" en true 
 // REVIEW - capitalizar las palabras con "capitalize" ejemplo en validStatus.map()
 
-const EntryPage = () => {
+interface Props {
+   entryDb: Entry;
+}
 
-   const [inputValue, setInputValue] = useState('')
-   const [status, setStatus] = useState<EntryStatus>('pending')
+const EntryPage: FC<Props> = ({ entryDb }) => {
+
+   const { changeStateEntry } = useContext(EntriesContext)
+
+   const [inputValue, setInputValue] = useState(entryDb.description)
+   const [status, setStatus] = useState<EntryStatus>(entryDb.status)
    const [touched, setTouched] = useState(false)
 
    const isValidInput = useMemo(() => inputValue.length <= 0, [inputValue, touched])
@@ -33,11 +44,19 @@ const EntryPage = () => {
    }
 
    const onSave = () => {
-      console.log({ inputValue, status })
+      if (inputValue.trim().length === 0) return;
+
+      const updateEntry: Entry = {
+         ...entryDb,
+         status,//el status de la entry en db se reemplaza por el status modificado aquí
+         description: inputValue
+      }
+
+      changeStateEntry(updateEntry, true);
    }
 
    return (
-      <Layout title='....' >
+      <Layout title={inputValue.substring(0, 20) + '... '} >
          <Grid
             container
             justifyContent='center'
@@ -47,8 +66,8 @@ const EntryPage = () => {
             <Grid item xs={12} sm={8} md={6} >
                <Card>
                   <CardHeader
-                     title={`Entrada: ${inputValue}`}
-                     subheader={`Creada hace:.... minutos`}
+                     title={`Entrada: `}
+                     subheader={`Creado ${getFormatDistaceToNow(entryDb.createAt)}`}
                   />
 
                   <CardContent>
@@ -114,8 +133,32 @@ const EntryPage = () => {
             <DeleteOutlinedIcon />
          </IconButton>
 
-      </Layout>
+      </Layout >
    )
+}
+
+// NOTE - You should use getServerSideProps when:
+// cuando la pagina debe ser construida con una petición del usuario(no una petición si no un request en el servido)
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+   // const {data} = await 
+   const { id } = ctx.params as { id: string };
+
+   const entryDb = await dbEntries.getEntryById(id);
+
+   if (!isValidObjectId(id)) {
+      return {
+         redirect: {
+            destination: '/',
+            permanent: false
+         }
+      }
+   }
+
+   return {
+      props: {
+         entryDb
+      }
+   }
 }
 
 export default EntryPage;
