@@ -13,7 +13,12 @@ export const Navbar = () => {
       <AppBar position='sticky'>
 
          <Toolbar>
-            <IconButton onClick={openSideMenu} size='large' edge='start' >
+
+            <IconButton
+               onClick={openSideMenu}
+               size='large'
+               edge='start'
+            >
                <MenuOutlineIcon />
             </IconButton>
 

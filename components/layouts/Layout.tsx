@@ -8,7 +8,7 @@ interface Props extends PropsWithChildren {
    title?: string;
 }
 
-// NOTE - La propeidad "sx" sirve para personalizar los estilos ademas tiene acceso a las propiedades del tema
+// NOTE - La propiedad "sx" sirve para personalizar los estilos ademas tiene acceso a las propiedades del tema
 
 export const Layout: FC<Props> = ({ title = 'OpenJira', children }) => {
    return (
