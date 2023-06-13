@@ -1,23 +1,20 @@
 import { createContext } from "react";
 
-
-
-
 interface ContextProps {
-   sidemenuOpen: boolean;
-   isAddingEntry: boolean;
-   isDraging: boolean;
+  sidemenuOpen: boolean;
+  isAddingEntry: boolean;
+  isDraging: boolean;
 
-   // Methods
-   openSideMenu: () => void;
-   closeSideMenu: () => void;
+  // Methods
+  openSideMenu: () => void;
+  closeSideMenu: () => void;
 
-   openAddingEntry: () => void;
-   closeAddingEntry: () => void;
+  openAddingEntry: () => void;
+  closeAddingEntry: () => void;
 
-   startDraging: () => void;
-   stopDraging: () => void;
+  startDraging: () => void;
+  stopDraging: () => void;
 }
 
 
-export const UIContext = createContext({} as ContextProps)
+export const UIContext = createContext({} as ContextProps);

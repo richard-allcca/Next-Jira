@@ -1,35 +1,38 @@
-import '../styles/globals.css'
-import type { AppProps } from 'next/app'
-import { CssBaseline, ThemeProvider } from '@mui/material'
+import type { AppProps } from 'next/app';
+
+import { CssBaseline, ThemeProvider } from '@mui/material';
 import { SnackbarProvider } from 'notistack';
 
+import { EntriesProvider } from '../context/entries/';
 import { UIProvider } from '../context/ui-context/';
-import { EntriesProvider } from '../context/entries/EntriesProvider';
 
-import { darkTheme, lightTheme } from '../themes'
+import { darkTheme, lightTheme } from '../themes';
+
+import '../styles/globals.css';
 
 
 function MyApp({ Component, pageProps }: AppProps) {
-   return (
-      <SnackbarProvider>
+  return (
+    <SnackbarProvider>
 
-         <EntriesProvider>
+      <EntriesProvider>
 
-            <UIProvider>
+        <UIProvider>
 
-               <ThemeProvider theme={darkTheme}>
+          <ThemeProvider theme={darkTheme}>
 
-                  <CssBaseline />
-                  <Component {...pageProps} />
+            <CssBaseline />
 
-               </ThemeProvider>
+            <Component {...pageProps} />
 
-            </UIProvider>
+          </ThemeProvider>
 
-         </EntriesProvider>
+        </UIProvider>
 
-      </SnackbarProvider>
-   )
+      </EntriesProvider>
+
+    </SnackbarProvider>
+  );
 }
 
-export default MyApp
+export default MyApp;

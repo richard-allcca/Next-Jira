@@ -3,11 +3,11 @@ import { Entry } from '../../interfaces/entry';
 
 
 interface ContextProps {
-   entries: Entry[];
+  entries: Entry[];
 
-   // Methods
-   addNewEntry: (description: string) => void;
-   changeStateEntry: (entry: Entry, showSnackbar?: boolean) => void;
+  // Methods
+  addNewEntry: (description: string) => void;
+  changeStateEntry: (entry: Entry, showSnackbar?: boolean) => void;
 }
 
-export const EntriesContext = createContext({} as ContextProps)
+export const EntriesContext = createContext({} as ContextProps);
