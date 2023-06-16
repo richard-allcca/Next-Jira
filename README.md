@@ -28,7 +28,7 @@ Para correr en local - Se utilizo `yarn` en lugar de `npm`
         href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
       />
 
-- Para correr en local se necesita la base de datos
+- DDBB MONGO en local se necesita tener docker corriendo y ejecutar:
 
         docker-compose up -d
 
@@ -119,3 +119,5 @@ Para correr en local - Se utilizo `yarn` en lugar de `npm`
    13. Leer desde base de datos
 
    14. Mantener persistente nuestra data
+
+   15. Context - provider - reducer

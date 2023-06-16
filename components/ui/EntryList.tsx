@@ -6,56 +6,67 @@ import { EntryStatus } from '../../interfaces';
 import { EntryCard } from './EntryCard';
 import { UIContext } from './../../context/ui-context/UIContext';
 
-import styles from './EntryList.module.css'
+import styles from './EntryList.module.css';
 interface Props {
-   status: EntryStatus
+  status: EntryStatus;
 }
 
-
+/**
+ * Status identifica la columna de listado de notas
+ * La propiedad "draggable" no es soportada en Brave
+ * @param status: se usara para cambiar el status de una cardEntry y ubicarla
+ * @returns Listado de CardEntry
+ */
 export const EntryList: FC<Props> = ({ status }) => {
 
-   const { entries, changeStateEntry } = useContext(EntriesContext)
-   const { isDraging, stopDraging } = useContext(UIContext)
+  const { entries, changeStateEntry } = useContext(EntriesContext);
+  const { isDraging, endDraging } = useContext(UIContext);
 
-   const entriesByStatus = useMemo(() => entries.filter((entry) => entry.status === status), [entries]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const entriesByStatus = useMemo(() => entries.filter((entry) => entry.status === status), [entries]);
 
-   const allowDrop = (event: DragEvent<HTMLDivElement>) => {
-      event.preventDefault();
+  /**
+   * Evita acciones por default, también se puede validar el elemento para decidir si este es permitido o no en este contenedor
+   * @param event recibe la data del elemento em movimientto con drag
+   */
+  const allowDrop = (event: DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+  };
 
-   }
+  /**
+   * recibe el id de la card en la que se esta haciendo drag para filtrarla y enviarla
+   * @param evento, recibe el id de event.dataTransfer.setData('text', entry._id)
+   */
+  const onDropEntry = (event: DragEvent<HTMLDivElement>) => {
+    const id = event.dataTransfer.getData('text');
 
-   const onDropEntry = (event: DragEvent<HTMLDivElement>) => {
+    const selectEntry = entries.find((e) => e._id === id)!;
+    selectEntry.status = status;
 
-      const id = event.dataTransfer.getData('text');
+    changeStateEntry(selectEntry);
+    endDraging();
+  };
 
-      const selectEntry = entries.find((e) => e._id === id)!;
-      selectEntry.status = status;
-      changeStateEntry(selectEntry)
+  return (
+    <div
+      onDrop={onDropEntry}
+      onDragOver={allowDrop}
+      className={isDraging ? styles.dragging : ''}
+    >
 
-      stopDraging();
-   }
-
-   return (
-      <div onDrop={onDropEntry}
-         onDragOver={allowDrop}
-         className={isDraging ? styles.dragging : ''}
+      <Paper
+        className={styles.paper}
+        sx={{ "&::-webkit-scrollbar": { display: "none" } }}
       >
+        <List sx={{ opacity: isDraging ? 0.2 : 1, transition: 'all .3s' }}>
+          {
+            entriesByStatus.map((entry) => {
+              return <EntryCard key={entry._id} entry={entry} />;
+            })
+          }
+        </List>
+      </Paper>
 
-         <Paper sx={{ "&::-webkit-scrollbar": { display: "none" } }} className={styles.paper} >
-
-            <List sx={{ opacity: isDraging ? 0.2 : 1, transition: 'all .3s' }}>
-               {
-                  entriesByStatus.map((entry) => {
-                     return <EntryCard key={entry._id} entry={entry} />
-                  })
-               }
-            </List>
-
-         </Paper>
-
-      </div>
-   )
-}
-
-// NOTE - Aqui hacemos el drop
-// REVIEW - con la info el _id del entry se puede validar mas cosas como por ejemplo si esta permitida la targeta para dejarla caer aqui o si el elemento puede ser arrastrado o no y mas
+    </div>
+  );
+};

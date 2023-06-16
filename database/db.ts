@@ -28,10 +28,17 @@ export const connect = async () => {
     }
   }
 
-  await mongoose.connect(process.env.MONGO_URL || '');
-  mongoConnection.isConnected = 1;
+  try {
 
-  console.log('Conectado a MongoDb:', process.env.MONGO_URL);
+    await mongoose.connect(process.env.MONGO_URL || '');
+    mongoConnection.isConnected = 1;
+
+    console.log('Conectado a MongoDb:', process.env.MONGO_URL);
+
+  } catch (error) {
+    console.log(error);
+  }
+
 };
 
 

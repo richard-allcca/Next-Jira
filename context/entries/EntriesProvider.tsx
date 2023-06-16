@@ -3,11 +3,11 @@ import { useEffect } from 'react';
 import { FC, PropsWithChildren, useReducer } from 'react';
 import { useSnackbar } from 'notistack';
 
-import { Entry } from '../../interfaces/entry';
-
 import { entriesReducer, EntriesContext } from './';
 import { entriesApi } from '../../apis';
 
+import { Entry } from '../../interfaces/entry';
+import { randomUUID } from 'crypto';
 export interface EntriesState {
   entries: Entry[];
 }
@@ -16,44 +16,58 @@ const ENTRIES_INITIAL_STATE: EntriesState = {
   entries: [],
 };
 
+// REVIEW - método de "addNewEntry" para agregar entradas sin back-end
+// const newEntry: Entry = { // Este proceso fue delegado a axios
+      //    _id: uuidv4(),
+      //    description,
+      //    status: 'pending',
+      //    createAt: Date.now()
+      // }
 
 export const EntriesProvider: FC<PropsWithChildren> = ({ children }): JSX.Element => {
 
   const [state, dispatch] = useReducer(entriesReducer, ENTRIES_INITIAL_STATE);
   const { enqueueSnackbar } = useSnackbar();
 
+  const addNewEntry =  (description: string) => {
 
-  const addNewEntry = async (description: string) => {
+    const newEntry: Entry = {
+      _id: description,
+      description: description,
+      createAt: Date.now(),
+      status: 'pending'
+    }
+    dispatch({ type: '[Entries] - Add', payload:  newEntry});
+    // try {
+    //   const { data } = await entriesApi.post<Entry>('/entries', { description });
 
-    const { data } = await entriesApi.post<Entry>('/entries', { description });
+    //   dispatch({ type: '[Entries] - Add', payload:  newEntry});
 
-    dispatch({ type: '[Entries] - Add', payload: data });
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   const changeStateEntry = async (entry: Entry, showSnackbar = false) => {
+      dispatch({ type: '[Entries] - Update State', payload: entry });
+    // try {
+    //   const { data } = await entriesApi.put<Entry>(`/entries/${entry._id}`, entry);
+    //   dispatch({ type: '[Entries] - Update State', payload: data });
 
-    try {
+    //   if (showSnackbar) {
+    //     enqueueSnackbar('Entrada actualizada 🙋‍♂️', {
+    //       variant: 'success',
+    //       autoHideDuration: 1500,
+    //       anchorOrigin: {
+    //         vertical: 'top',
+    //         horizontal: 'right'
+    //       }
+    //     });
+    //   }
 
-      // NOTE - para no devolver todo el entry destructura en el parametro recibido solo lo necesario
-      const { data } = await entriesApi.put<Entry>(`/entries/${entry._id}`, entry);
-      dispatch({ type: '[Entries] - Update State', payload: data });
-
-      // STUB - Snackbar example
-      if (showSnackbar) {
-
-        enqueueSnackbar('Entrada actualizada 🙋‍♂️', {
-          variant: 'success',
-          autoHideDuration: 1500,
-          anchorOrigin: {
-            vertical: 'top',
-            horizontal: 'right'
-          }
-        });
-      }
-
-    } catch (error) {
-      console.log(error);
-    }
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   const refreshEntries = async () => {
@@ -65,18 +79,9 @@ export const EntriesProvider: FC<PropsWithChildren> = ({ children }): JSX.Elemen
 
   useEffect(() => { refreshEntries(); }, []);
 
-
   return (
     <EntriesContext.Provider value={{ ...state, addNewEntry, changeStateEntry }}>
       {children}
     </EntriesContext.Provider>
   );
 };
-
-// NOTE - método de "addNewEntry" para agregar entradas sin back-end
-// const newEntry: Entry = { // Este proceso fue delegado a axios
-      //    _id: uuidv4(),
-      //    description,
-      //    status: 'pending',
-      //    createAt: Date.now()
-      // }

@@ -1,17 +1,15 @@
-
 import { FC, PropsWithChildren, useReducer } from "react";
+
 import { UIContext, uiReducer } from './';
-
-
 export interface UIState {
-  sidemenuOpen: boolean;
+  isOpenSidemenu: boolean;
   isAddingEntry: boolean;
   isDraging: boolean;
 }
 
 const UI_INITIAL_STATE: UIState = {
-  sidemenuOpen: false,
   isAddingEntry: false,
+  isOpenSidemenu: false,
   isDraging: false,
 };
 
@@ -28,18 +26,18 @@ export const UIProvider: FC<PropsWithChildren> = ({ children }): JSX.Element => 
   };
 
   const openAddingEntry = () => {
-    dispatch({ type: 'ENTRY - Open FormEntry' });
+    dispatch({ type: 'ENTRY - Open add input' });
   };
 
   const closeAddingEntry = () => {
-    dispatch({ type: 'ENTRY - Close FormEntry' });
+    dispatch({ type: 'ENTRY - Close add input' });
   };
 
   const startDraging = () => {
     dispatch({ type: 'DRAG - Start Draging' });
   };
 
-  const stopDraging = () => {
+  const endDraging = () => {
     dispatch({ type: 'DRAG - Stop Draging' });
   };
 
@@ -50,7 +48,7 @@ export const UIProvider: FC<PropsWithChildren> = ({ children }): JSX.Element => 
     openAddingEntry,
     closeAddingEntry,
     startDraging,
-    stopDraging
+    endDraging
   };
 
   return (

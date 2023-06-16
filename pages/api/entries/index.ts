@@ -21,13 +21,24 @@ export default function handler(
 }
 
 const getEntries = async (res: NextApiResponse<Data>) => {
-	await db.connect();
 
-	const entries = await EntryModel.find().sort({ createdAt: "ascending" });
+  try {
 
-	await db.disconnect();
+    await db.connect();
 
-	res.status(200).json(entries);
+    const entries = await EntryModel.find().sort({ createdAt: "ascending" });
+
+    await db.disconnect();
+
+    res.status(200).json(entries);
+  } catch (error) {
+    console.log(error);
+    return res
+    .status(500)
+    .json({
+      message: "No se pudo encontrar entradas"
+    })
+  }
 };
 
 const postEntry = async (req: NextApiRequest, res: NextApiResponse<Data>) => {

@@ -1,11 +1,10 @@
 import { createContext } from "react";
 
 interface ContextProps {
-  sidemenuOpen: boolean;
+  isOpenSidemenu: boolean;
   isAddingEntry: boolean;
   isDraging: boolean;
 
-  // Methods
   openSideMenu: () => void;
   closeSideMenu: () => void;
 
@@ -13,7 +12,7 @@ interface ContextProps {
   closeAddingEntry: () => void;
 
   startDraging: () => void;
-  stopDraging: () => void;
+  endDraging: () => void;
 }
 
 
