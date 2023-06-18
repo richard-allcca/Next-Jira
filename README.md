@@ -2,6 +2,8 @@
 
 Clon de Jira
 
+Pendiente eliminación de entradas
+
 ## Configuararciones iniciales
 
 - Reconstruir los modulos con `npm i`
@@ -41,12 +43,6 @@ Clon de Jira
 
       mongodb://localhost:27017/entriesdb
 
-- Llenar la base de datos con información de prueba
-
-      <!-- FIXME - (TIPO DE PETICION PARA LLENAR DATOS) use GET -->
-
-        http://localhost:3000/api/seed
-
 ## Dependecias
 
     yarn add @mui/material @emotion/react @emotion/styled
@@ -63,7 +59,7 @@ Clon de Jira
 - [Middleware Next](https://nextjs.org/docs/advanced-features/middleware)
 - [Guia de migración Middleware Next](https://nextjs.org/docs/messages/middleware-upgrade-guide#breaking-changes)
 - [Snackbar](https://mui.com/material-ui/react-snackbar/)
-- [notistack - con Provider ](https://github.com/iamhosseindhv/notistack)
+- [notistack - con Provider](https://github.com/iamhosseindhv/notistack)
 - [date-fns](https://date-fns.org/)
 
 ## Notas - Errores y Ocurrencias
@@ -115,3 +111,5 @@ Clon de Jira
    14. Mantener persistente nuestra data
 
    15. Context - provider - reducer
+
+![Vista previa](public/preview.png)

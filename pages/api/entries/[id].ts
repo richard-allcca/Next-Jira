@@ -29,7 +29,8 @@ export default function handler(
 }
 
 /**
- * REVIEW -peticion no implementada en el cliente solo demo
+ * NOTE - peticion para obtener una entrada con id
+ * NOTE - peticion no implementada en el cliente solo demo
  * @param req mongoId
  * @param res Entry
  */

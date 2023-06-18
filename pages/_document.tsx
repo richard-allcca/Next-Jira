@@ -1,5 +1,6 @@
 import Document, { DocumentContext, Html, Head, Main, NextScript } from 'next/document';
 
+// NOTE - Sirve para tener control sobre como next crea el documento
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
     const initalProps = await Document.getInitialProps(ctx);
@@ -29,5 +30,3 @@ class MyDocument extends Document {
 }
 
 export default MyDocument;
-
-// NOTE - Sirve para tener control sobre como next crea el documento

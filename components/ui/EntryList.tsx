@@ -39,7 +39,7 @@ export const EntryList: FC<Props> = ({ status }) => {
 	};
 
 	/**
-	 * recibe el id de la card en la que se esta haciendo drag para filtrarla y enviarla
+	 * Obtiene el id de la card en movimiento drag para actualizar su estado y se detecte el cambio
 	 * @param evento, recibe el id de event.dataTransfer.setData('text', entry._id)
 	 */
 	const onDropEntry = (event: DragEvent<HTMLDivElement>) => {
