@@ -14,5 +14,6 @@ export const getEntryById = async (id: string): Promise<IEntry | null> => {
   const entry = await EntryModel.findById(id).lean();
   await db.disconnect();
 
+  // method for serialize mongo_id
   return JSON.parse(JSON.stringify(entry));
 };

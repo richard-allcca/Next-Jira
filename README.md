@@ -63,7 +63,7 @@ Clon de Jira
 - [Middleware Next](https://nextjs.org/docs/advanced-features/middleware)
 - [Guia de migración Middleware Next](https://nextjs.org/docs/messages/middleware-upgrade-guide#breaking-changes)
 - [Snackbar](https://mui.com/material-ui/react-snackbar/)
-- [notistack](https://github.com/iamhosseindhv/notistack)
+- [notistack - con Provider ](https://github.com/iamhosseindhv/notistack)
 - [date-fns](https://date-fns.org/)
 
 ## Notas - Errores y Ocurrencias

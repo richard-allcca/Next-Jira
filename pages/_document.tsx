@@ -1,33 +1,33 @@
-import Document, { DocumentContext, Html, Head, Main, NextScript } from 'next/document'
+import Document, { DocumentContext, Html, Head, Main, NextScript } from 'next/document';
 
 class MyDocument extends Document {
-   static async getInitialProps(ctx: DocumentContext) {
-      const initalProps = await Document.getInitialProps(ctx)
+  static async getInitialProps(ctx: DocumentContext) {
+    const initalProps = await Document.getInitialProps(ctx);
 
-      return initalProps
-   }
+    return initalProps;
+  }
 
-   render() {
-      return (
-         <Html>
+  render() {
+    return (
+      <Html>
 
-            <Head>
-               <link
-                  rel="stylesheet"
-                  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
-               />
-            </Head>
+        <Head>
+          <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+          />
+        </Head>
 
-            <body>
-               <Main />
-               <NextScript />
-            </body>
+        <body>
+          <Main />
+          <NextScript />
+        </body>
 
-         </Html>
-      )
-   }
+      </Html>
+    );
+  }
 }
 
-export default MyDocument
+export default MyDocument;
 
 // NOTE - Sirve para tener control sobre como next crea el documento

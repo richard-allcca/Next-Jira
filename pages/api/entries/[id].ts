@@ -28,6 +28,11 @@ export default function handler(
 	}
 }
 
+/**
+ * REVIEW -peticion no implementada en el cliente solo demo
+ * @param req mongoId
+ * @param res Entry
+ */
 const getEntry = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
 	const { id } = req.query;
 

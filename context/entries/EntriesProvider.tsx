@@ -31,13 +31,6 @@ export const EntriesProvider: FC<PropsWithChildren> = ({
 	};
 
 	const addNewEntry = async (description: string) => {
-		// const newEntry: Entry = { /* Method con front sin persistencia en mongo */
-		// 	_id: description,
-		// 	description: description,
-		// 	createAt: Date.now(),
-		// 	status: "pending",
-		// };
-    // dispatch({ type: '[Entries] - Add', payload:  newEntry});
 		try {
 		  const { data } = await entriesApi.post<Entry>('/entries', { description });
 		  dispatch({ type: '[Entries] - Add', payload:  data});
@@ -46,11 +39,10 @@ export const EntriesProvider: FC<PropsWithChildren> = ({
 		}
 	};
 
-	const changeStateEntry = async (entry: Entry, showSnackbar = false) => {
-		// dispatch({ type: "[Entries] - Update State", payload: entry }); /* use in dev sin mongo */
+	const updateEntry = async (entry: Entry, showSnackbar = false) => {
 		try {
 		  const { data } = await entriesApi.put<Entry>(`/entries/${entry._id}`, entry);
-		  dispatch({ type: '[Entries] - Update State', payload: data });
+		  dispatch({ type: '[Entries] - Update Entry', payload: data });
 
 		  if (showSnackbar) {
 		    enqueueSnackbar('Entrada actualizada 🙋‍♂️', {
@@ -69,7 +61,7 @@ export const EntriesProvider: FC<PropsWithChildren> = ({
 
 	return (
 		<EntriesContext.Provider
-			value={{ ...state, addNewEntry, changeStateEntry }}
+			value={{ ...state, addNewEntry, updateEntry }}
 		>
 			{children}
 		</EntriesContext.Provider>

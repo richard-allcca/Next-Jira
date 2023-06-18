@@ -6,7 +6,7 @@ import { Card, CardActionArea, CardActions, CardContent, Typography } from '@mui
 import { UIContext } from './../../context/ui-context/UIContext';
 import { Entry } from '../../interfaces';
 
-import { getFormatDistaceToNow } from '../../utils';
+import { getCreationDate } from '../../utils';
 interface Props {
   entry: Entry;
 }
@@ -52,7 +52,7 @@ export const EntryCard: FC<Props> = ({ entry }) => {
               paddingRight: 2,
             }}
           >
-            <Typography variant="body2">{getFormatDistaceToNow(entry.createAt)}</Typography>
+            <Typography variant="body2">{getCreationDate(entry.createAt)}</Typography>
           </CardActions>
         </CardContent>
       </CardActionArea>

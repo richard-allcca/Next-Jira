@@ -18,7 +18,7 @@ interface Props {
  * @returns Listado de CardEntry
  */
 export const EntryList: FC<Props> = ({ status }) => {
-	const { entries, changeStateEntry } = useContext(EntriesContext);
+	const { entries, updateEntry } = useContext(EntriesContext);
 	const { isDraging, endDraging } = useContext(UIContext);
 
   /**
@@ -48,7 +48,7 @@ export const EntryList: FC<Props> = ({ status }) => {
 		const selectEntry = entries.find((e) => e._id === id)!;
 		selectEntry.status = status;
 
-		changeStateEntry(selectEntry);
+		updateEntry(selectEntry);
 		endDraging();
 	};
 
