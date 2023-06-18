@@ -4,6 +4,7 @@ import { EntryModel, IEntry } from "../../../models";
 
 type Data = { message: string } | IEntry[] | IEntry;
 
+// http://localhost:3000/api/entries
 export default function handler(
 	req: NextApiRequest,
 	res: NextApiResponse<Data>
@@ -21,28 +22,25 @@ export default function handler(
 }
 
 const getEntries = async (res: NextApiResponse<Data>) => {
+	try {
+		await db.connect();
+		const entries = await EntryModel.find().sort({ createdAt: "ascending" });
+		await db.disconnect();
 
-  try {
-
-    await db.connect();
-
-    const entries = await EntryModel.find().sort({ createdAt: "ascending" });
-
-    await db.disconnect();
-
-    res.status(200).json(entries);
-  } catch (error) {
-    console.log(error);
-    return res
-    .status(500)
-    .json({
-      message: "No se pudo encontrar entradas"
-    })
-  }
+		res.status(200).json(entries);
+	} catch (error) {
+		console.log(error);
+		return res.status(500).json({
+			message: "No se pudo encontrar entradas",
+		});
+	}
 };
 
 const postEntry = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
 	const { description } = req.body;
+
+	if (!description)
+		return res.status(400).json({ message: "Descripción es requerida" });
 
 	const newEntry = new EntryModel({
 		description,
@@ -53,6 +51,7 @@ const postEntry = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
 		await db.connect();
 		await newEntry.save();
 		await db.disconnect();
+
 		return res.status(201).json(newEntry);
 	} catch (error) {
 		await db.disconnect();

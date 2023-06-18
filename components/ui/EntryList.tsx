@@ -21,6 +21,9 @@ export const EntryList: FC<Props> = ({ status }) => {
 	const { entries, changeStateEntry } = useContext(EntriesContext);
 	const { isDraging, endDraging } = useContext(UIContext);
 
+  /**
+   * Detecta cambio en las "entries" para volver a filtrar y rederizar
+   */
 	const entriesByStatus = useMemo(
     () => entries.filter((entry) => entry.status === status),
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -28,7 +31,7 @@ export const EntryList: FC<Props> = ({ status }) => {
 	);
 
 	/**
-	 * Evita acciones por default, también se puede validar el elemento para decidir si este es permitido o no en este contenedor
+	 * Aqui puede validar el elemento para decidir si este es permitido o no en este contenedor
 	 * @param event recibe la data del elemento em movimientto con drag
 	 */
 	const allowDrop = (event: DragEvent<HTMLDivElement>) => {
