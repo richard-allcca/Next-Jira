@@ -35,7 +35,7 @@ interface Props {
 	entryInDb: Entry;
 }
 
-// TODO - ELIMINAR ENTRADA
+// TODO - IMPLEMENTAR ELIMINACION DE ENTRADA
 
 const EntryPage: FC<Props> = ({ entryInDb }) => {
 	const { updateEntry } = useContext(EntriesContext);
