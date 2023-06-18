@@ -1,5 +1,5 @@
 
-// NOTE - Data inicial para db
+// NOTE - Data inicial para db en la  primera conexion
 
 interface SeedData {
   entries: SeedEntry[];

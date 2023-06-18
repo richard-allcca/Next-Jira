@@ -1,5 +1,3 @@
-
-
 export interface Entry {
    _id: string,
    description: string,

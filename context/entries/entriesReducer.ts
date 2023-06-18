@@ -1,4 +1,3 @@
-import { log } from 'console';
 import { EntriesState } from './';
 import { Entry } from './../../interfaces/entry';
 

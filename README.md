@@ -1,14 +1,6 @@
 # Next.js - Open Jira app
 
-Para correr en local - Se utilizo `yarn` en lugar de `npm`
-
-- First, run the development server:
-
-      npm run dev
-      # or
-      yarn dev
-
-   Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Clon de Jira
 
 ## Configuararciones iniciales
 
@@ -16,10 +8,25 @@ Para correr en local - Se utilizo `yarn` en lugar de `npm`
 
     Importante agregar `mongo/` al gitignore
 
-- instalación de:
+- Para correr localmente necesita la DDBB, tener docker desktop corriendo y ejecutar:
 
-      yarn add @mui/material @emotion/react @emotion/styled
-      yarn add @mui/icons-material
+        docker compose up -d
+
+- Para correr el proyecto - Se utilizo `yarn` o `npm`
+
+      npm run dev
+      # or
+      yarn dev
+
+   Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+- Cadena de conexion con MongoDB local
+
+      mongodb://localhost:27017/entriesdb
+
+- Llenar la DDDBB con datos de prueba - LUEGO DE USAR EL COMANDO NO USES ESTE COMANDO O ELIMINA EL FILE /page/api/seed
+
+      GET - localhost://localhost:3000/api/seed
 
 - CDN en el _document
 
@@ -28,19 +35,15 @@ Para correr en local - Se utilizo `yarn` en lugar de `npm`
         href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
       />
 
-- DDBB MONGO en local se necesita tener docker corriendo y ejecutar:
-
-        docker-compose up -d
-
 - Configuarar variables de entorno
 
 - MongoDB URL Local, para conexion con la base de datos.
 
-        mongodb://localhost:27017/entriesdb
+      mongodb://localhost:27017/entriesdb
 
 - Llenar la base de datos con información de prueba
 
-      use GET
+      <!-- FIXME - (TIPO DE PETICION PARA LLENAR DATOS) use GET -->
 
         http://localhost:3000/api/seed
 
@@ -65,16 +68,7 @@ Para correr en local - Se utilizo `yarn` en lugar de `npm`
 
 ## Notas - Errores y Ocurrencias
 
-   1. Nota: Quitar el scroll Y and X en
-      ejemplo en pages "EntryLlist" ln/9
-
-          const stylesPaper = {
-            height: "calc(100vh - 180px)",
-            overflow: "scroll",
-            backgroundColor: "transparent",
-            padding: "1px 5px",
-            "&::-webkit-scrollbar": { display: "none" },
-          };
+   1. Nota: Quitar el scroll Y and X ejemplo en pages /EntryLlist {styles.paper}
 
    2. Ocurrencia: La Propiedad `draggable` de Card no es soportada en "Brave"
 
@@ -84,9 +78,9 @@ Para correr en local - Se utilizo `yarn` en lugar de `npm`
 
       | const checkMongoIDRegExp = new RegExp("^[0-9a-fA-F]{24}$");
 
-   5. Nota: uso de `notisnack` ejemplo en `EntriesProvider`;
+   5. Nota: uso de `notisnack` ejemplo en /EntriesProvider;
 
-   6. Nota: uso de `date-fns` ejemplo en `EntryCards` implementación en `utils`
+   6. Nota: uso de `date-fns` ejemplo en /EntryCards implementación en `utils`
 
    7. La propiedad `sx=` es igual a `style=` ademas tiene acceso al theme
 

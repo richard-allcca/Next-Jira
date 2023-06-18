@@ -6,10 +6,8 @@ import React, { useState, ChangeEvent, useContext } from 'react';
 
 import { EntriesContext } from './../../context/entries/EntriesContext';
 import { UIContext } from './../../context/ui-context/UIContext';
-import { log } from 'console';
 
 export const NewEntry = () => {
-
   const { addNewEntry } = useContext(EntriesContext);
   const { isAddingEntry, openAddingEntry, closeAddingEntry } = useContext(UIContext);
 
@@ -33,7 +31,8 @@ export const NewEntry = () => {
       {
         !isAddingEntry
           ? (
-            <Button onClick={openAddingEntry}
+            <Button
+              onClick={openAddingEntry}
               startIcon={<AddIcon />}
               fullWidth
               variant='outlined'
@@ -59,15 +58,21 @@ export const NewEntry = () => {
               </TextField>
 
               <Box display={'flex'} justifyContent={'space-between'}>
-
-                <Button onClick={closeAddingEntry} variant='text'>
+                <Button
+                  onClick={closeAddingEntry}
+                  variant='text'
+                  >
                   Cancelar
                 </Button>
 
-                <Button onClick={onSave} variant='outlined' color='secondary' endIcon={<SaveIcon />}>
+                <Button
+                  onClick={onSave}
+                  variant='outlined'
+                  color='secondary'
+                  endIcon={<SaveIcon />}
+                  >
                   Guardar
                 </Button>
-
               </Box>
             </>
           )

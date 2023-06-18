@@ -15,7 +15,7 @@ interface Props {
 
 export const EntryCard: FC<Props> = ({ entry }) => {
 
-  const { startDraging, stopDraging } = useContext(UIContext);
+  const { startDraging, endDraging: stopDraging } = useContext(UIContext);
   const router = useRouter();
 
   const onDragStart = (event: DragEvent<HTMLDivElement>) => {
