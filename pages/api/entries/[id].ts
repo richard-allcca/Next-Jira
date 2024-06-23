@@ -57,6 +57,7 @@ const updateEntry = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
 	await db.connect();
 
 	const entryToUpdate = await EntryModel.findById(id);
+
 	if (!entryToUpdate) {
 		await db.disconnect();
 		res.status(400).json({ message: `No hay entrada con el id: ${id}` });

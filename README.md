@@ -20,7 +20,7 @@ Pendiente eliminación de entradas
       # or
       yarn dev
 
-   Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+   Open [localhost](http://localhost:3000) with your browser to see the result.
 
 - Cadena de conexion con MongoDB local
 

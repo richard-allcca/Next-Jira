@@ -12,9 +12,9 @@ interface Props {
 }
 
 /**
- * Status identifica la columna de listado de notas
+ * se usara para cambiar el status de una cardEntry y ubicarla
  * La propiedad "draggable" no es soportada en Brave
- * @param status: se usara para cambiar el status de una cardEntry y ubicarla
+ * @param status: Status identifica la columna de listado de notas
  * @returns Listado de CardEntry
  */
 export const EntryList: FC<Props> = ({ status }) => {
